@@ -11,27 +11,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agendavlad.EditarContactoController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="353.0" xmlns="http://javafx.com/javafx/13" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.mycompany.agendavlad.CrearContactoController">
    <children>
-      <ImageView fitHeight="59.0" fitWidth="59.0" layoutX="25.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="69.0" fitWidth="82.0" layoutX="25.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@img/gear.png" />
+            <Image url="@img/add-contact.png" />
          </image>
       </ImageView>
-      <Label layoutX="94.0" layoutY="32.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Edición de contacto" />
+      <Label layoutX="108.0" layoutY="29.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Contacto Nuevo" />
       <HBox alignment="CENTER" layoutX="129.0" layoutY="143.0" spacing="5" style="-fx-padding: 10 0 10 0;" />
       <HBox alignment="CENTER" layoutX="129.0" layoutY="188.0" spacing="5" style="-fx-padding: 10 0 10 0;" />
-      <HBox alignment="CENTER" layoutX="112.0" layoutY="203.0" spacing="5" style="-fx-padding: 10 0 10 0;">
+      <HBox alignment="CENTER" layoutX="125.0" layoutY="233.0" spacing="5" style="-fx-padding: 10 0 10 0;" />
+      <HBox alignment="CENTER" layoutX="59.0" layoutY="221.0" prefHeight="44.0" prefWidth="237.0" spacing="5">
          <children>
-                <Button onAction="#eliminarContacto" prefHeight="0.0" prefWidth="0.0">
-               <graphic>
-                  <ImageView fitHeight="29.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/basura.png" />
-                     </image>
-                  </ImageView>
-               </graphic></Button>
-                <Button onAction="#guardarCambios">
+            <Button onAction="#crearContacto">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -39,7 +32,7 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-                <Button onAction="#cancelarEdicion">
+            <Button onAction="#cancelar">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -47,8 +40,8 @@
                      </image>
                   </ImageView>
                </graphic></Button>
-         </children></HBox>
-
+         </children>
+      </HBox>
       <GridPane layoutX="43.0" layoutY="83.0" prefHeight="120.0" prefWidth="268.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

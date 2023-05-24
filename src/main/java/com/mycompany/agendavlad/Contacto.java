@@ -64,27 +64,6 @@ public class Contacto {
         this.direccion.set(direccion);
     }
 
-    public String getNombreCompleto() {
-        return nombre.get() + " " + apellidos.get();
-    }
-    
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Contacto contacto = (Contacto) obj;
-        return nombre.get().equals(contacto.getNombre());
-    }
-
-    @Override
-    public int hashCode() {
-        return nombre.get().hashCode();
-    }
-
     @Override
     public String toString() {
         return nombre.get();

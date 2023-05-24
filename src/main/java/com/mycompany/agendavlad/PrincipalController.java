@@ -2,7 +2,6 @@ package com.mycompany.agendavlad;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class AgendaController {
+public class PrincipalController {
     @FXML
     private TextField buscarTextField;
     @FXML
@@ -29,10 +28,10 @@ public class AgendaController {
     @FXML
     private TableColumn<Contacto, String> direccionColumn;
 
-    private final AgendaDAO agendaDAO; // Clase para acceder a la base de datos
+    private final AgendaDB agendaDB; 
 
-    public AgendaController() {
-        agendaDAO = new AgendaDAO(); // Inicializar la clase de acceso a la BD
+    public PrincipalController() {
+        agendaDB = new AgendaDB(); 
     }
 
     @FXML
@@ -41,16 +40,14 @@ public class AgendaController {
         buscarTextField.textProperty().addListener((observable, oldValue, newValue) -> {
             buscarContacto(newValue);
         });
-        // Configurar las celdas de las columnas para mostrar los datos de los contactos
+        
         nombreColumn.setCellValueFactory(cellData -> cellData.getValue().getNombreProperty());
         apellidosColumn.setCellValueFactory(cellData -> cellData.getValue().getApellidosProperty());
         telefonoColumn.setCellValueFactory(cellData -> cellData.getValue().getTelefonoProperty());
         direccionColumn.setCellValueFactory(cellData -> cellData.getValue().getDireccionProperty());
 
-        // Cargar los contactos desde la base de datos y mostrarlos en la tabla
-        tablaContactos.setItems(agendaDAO.obtenerContactos());
+        tablaContactos.setItems(agendaDB.obtenerContactos());
         
-        // Agregar el evento de clic a la tabla
         tablaContactos.setOnMouseClicked(event -> {
             if (event.getClickCount() == 2) {
                 Contacto contactoSeleccionado = tablaContactos.getSelectionModel().getSelectedItem();
@@ -62,34 +59,29 @@ public class AgendaController {
     }
 
     public void buscarContacto(String nombre) {
-        // Realizar la búsqueda de contactos según el valor del campo de búsqueda
         ObservableList<Contacto> resultados;
 
         try {
-            resultados = agendaDAO.buscarContactosPorNombre(nombre);
+            resultados = agendaDB.buscarContactosPorNombre(nombre);
             
             tablaContactos.setItems(resultados);
         } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
     
     @FXML
     public void mostrarFormularioAgregar(ActionEvent event) throws SQLException {
         try {
-            System.out.println("Proves:");
-            ObservableList<Contacto> contactos = agendaDAO.buscarContactosPorNombre("a");
 
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("formulario.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("crearContacto.fxml"));
             Parent root = loader.load();
             Stage stage = new Stage();
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.setTitle("Agregar Contacto");
             stage.setScene(new Scene(root));
             stage.showAndWait();
-            tablaContactos.setItems(agendaDAO.obtenerContactos());
+            tablaContactos.setItems(agendaDB.obtenerContactos());
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
     
@@ -107,12 +99,9 @@ public class AgendaController {
             stage.setScene(new Scene(root));
             stage.showAndWait();
 
-            tablaContactos.refresh(); // Actualizar la tabla después de la edición
+            tablaContactos.setItems(agendaDB.obtenerContactos());
         } catch (IOException e) {
-            e.printStackTrace();
         }
     }
-
-    
     
 }
